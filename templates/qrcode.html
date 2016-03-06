@@ -1,0 +1,66 @@
+{% extends "lay.html" %}
+{% block body %}
+<div class="main-content">
+<div class="main-content-inner">
+<div class="breadcrumbs" id="breadcrumbs">
+<script type="text/javascript">
+try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+</script>
+<ul class="breadcrumb">
+<li>
+<i class="ace-icon fa fa-home home-icon"></i>
+用户管理
+</li>
+<li>
+令牌绑定
+</li>
+</ul><!-- /.breadcrumb -->
+<div class="nav-search" id="nav-search">
+<form class="form-search">
+<span class="input-icon">
+<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+<i class="ace-icon fa fa-search nav-search-icon"></i>
+</span>
+</form>
+</div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+<div class="page-header">
+<h1>
+个人信息
+</h1>
+</div><!-- /.page-header -->
+<div class="row">
+<div class="col-xs-12">
+<!-- PAGE CONTENT BEGINS -->
+<div class="row">
+<div class="col-xs-12">
+<div class="profile-user-info profile-user-info-striped">
+<div class="profile-info-row">
+<div class="profile-info-name">绑定方法</div>
+<div class="profile-info-value">
+	使用Google Authentication手动添加令牌号或扫描下面二维码
+</div>
+</div>
+<div class="profile-info-name">令牌号</div>
+<div class="profile-info-value">
+  {% if key %}{{ key }}{% endif %}
+</div>
+<div class="profile-info-row">
+<div class="profile-info-name">令牌绑定</div>
+<div class="profile-info-value">
+<img src='/qr/{% if url %}{{ url }}{% endif %}'/>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- /.span -->
+</div><!-- /.row -->
+</div><!-- /.col -->
+</div><!-- /.row -->
+</div><!-- /.page-content -->
+</div>
+</div><!-- /.main-content -->
+{% endblock %}

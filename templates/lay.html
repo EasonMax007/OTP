@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Dashboard - OTP管理系统</title>
+
+		<meta name="description" content="overview &amp; stats" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/4.2.0/css/font-awesome.min.css') }}" />
+
+		<!-- page specific plugin styles -->
+
+		<!-- text fonts -->
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts.googleapis.com.css') }}" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/ace.min.css') }}" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="{{ url_for('static', filename='css/ace-part2.min.css') }}" class="ace-main-stylesheet" />
+		<![endif]-->
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="{{ url_for('static', filename='css/ace-ie.min.css') }}" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="{{ url_for('static', filename='js/ace-extra.min.js') }}"></script>
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="{{ url_for('static', filename='js/html5shiv.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="navbar-container" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="/dashboard.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+								OTP 管理系统
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<li class="light-blue">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<span class="user-info">
+									<small>欢迎,</small>
+									{{ session.user }}
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li class="divider"></li>
+
+								<li>
+                                                                        <a href="{{ url_for('logout') }}">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div><!-- /.navbar-container -->
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li {% if request.path.split('/')[1] == "user" %} class="active open" {% endif %}>
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon glyphicon glyphicon-user"></i>
+							<span class="menu-text">
+								用户管理
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li {% if request.path == "/user/info.html" %} class="active"{% endif %}>
+								<a href="/user/info.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									个人信息
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li {% if request.path == "/user/bound.html" %} class="active"{% endif %}>
+								<a href="/user/bound.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									令牌绑定
+								</a>
+
+								<b class="arrow"></b>
+							<li {% if request.path == "/user/check.html" %} class="active"{% endif %}>
+								<a href="/user/check.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									令牌校验
+								</a>
+
+								<b class="arrow"></b>
+						</ul>
+					</li>
+				</ul><!-- /.nav-list -->
+				</ul><!-- /.nav-list -->
+
+				<ul class="nav nav-list">
+					<li {% if request.path.split('/')[1] == "software" %} class="active open" {% endif %}>
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon glyphicon glyphicon-user"></i>
+							<span class="menu-text">
+								软件管理
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li {% if request.path == "/software/info.html" %} class="active"{% endif %}>
+								<a href="/software/info.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+										软件说明
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li {% if request.path == "/software/ios.html" %} class="active"{% endif %}>
+								<a href="/software/ios.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+										IOS
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li {% if request.path == "/software/android.html" %} class="active"{% endif %}>
+								<a href="/software/android.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+										Android
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+				</ul><!-- /.nav-list -->
+				</ul><!-- /.nav-list -->
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+			</div>
+{% block body %}{% endblock %}
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">OTP</span>
+							PAF &copy; 2016
+						</span>
+
+						&nbsp; &nbsp;
+						<span class="action-buttons">
+							<a href="#">
+								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+							</a>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script src="{{ url_for('static', filename='js/jquery.2.1.1.min.js') }}"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="{{ url_for('static', filename='js/jquery.1.11.1.min.js') }}"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{{ url_for('static', filename='js/jquery.min.js') }}'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+window.jQuery || document.write("<script src='{{ url_for('static', filename='js/jquerylx.min.js') }}'>"+"<"+"/script>");
+</script>
+<![endif]-->
+		<script type="text/javascript">
+                        if('ontouchstart' in document.documentElement) document.write("<script src='{{ url_for('static', filename='jquery.mobile.custom.min.js') }}'>"+"<"+"/script>");
+		</script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!--[if lte IE 8]>
+		  <script src="{{ url_for('static', filename='js/excanvas.min.js') }}"></script>
+		<![endif]-->
+		<script src="{{ url_for('static', filename='js/jquery-ui.custom.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.easypiechart.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.sparkline.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.flot.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.flot.pie.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.flot.resize.min.js') }}"></script>
+		<!-- ace scripts -->
+		<script src="{{ url_for('static', filename='js/ace-elements.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/ace.min.js') }}"></script>
+{% block js %}{% endblock %}
+	</body>
+</html>
